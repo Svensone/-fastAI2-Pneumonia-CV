@@ -86,12 +86,12 @@ def prediction(img, display_img):
     # loading spinner
     with st.spinner('Wait a second .....'):
         time.sleep(3)
-        
-#  load Learner
-    # path_learner = pathlib.Path('export.pkl')
-    # print(path_learner)
 
-    learn = load_learner(pathlib.Path('export.pkl'))
+#  load Learner
+    path_learner = pathlib.Path('export.pkl')
+    print(path_learner)
+
+    learn = load_learner(path_learner)
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
