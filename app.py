@@ -28,12 +28,18 @@ import PIL.Image
 
 # adjustment for different systems (share.io PosixPath)
 ################################
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
-# option 2:
-# plt = platform.system()
-# if plt == 'Linux': 
-#     pathlib.PureWindowsPath = pathlib.PurePosixPath
+# Option 1: when working on localhost:8501
+# temp = pathlib.PosixPath
+# pathlib.PosixPath = pathlib.WindowsPath
+
+# option 2: for when deploying on share.streamlit.io
+plt = platform.system()
+if plt == 'Linux': 
+    pathlib.WindowsPath = pathlib.PosixPath
+else :
+    temp = pathlib.PosixPath
+    pathlib.PosixPath = pathlib.WindowsPath
+
 
 ## Layout App
 ##################
