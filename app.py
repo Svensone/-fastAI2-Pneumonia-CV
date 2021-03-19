@@ -36,7 +36,7 @@ import PIL.Image
 plt = platform.system()
 if plt == 'Linux': 
     pathlib.WindowsPath = pathlib.PosixPath
-else :
+else:
     temp = pathlib.PosixPath
     pathlib.PosixPath = pathlib.WindowsPath
 
@@ -87,11 +87,10 @@ def prediction(img, display_img):
     with st.spinner('Wait a second .....'):
         time.sleep(3)
 #  load Learner
-    path_learner = pathlib.Path("models", 'export.pkl')
-    # path_learner = pathlib.Path('C:/Users/ansve/Coding/Projects-DataSCience/2021.03.15_Streamlit_Pneumonia_ML/models/export.pkl')
-    print(path_learner)
+    # path_learner = pathlib.Path('export.pkl')
+    # print(path_learner)
 
-    learn = load_learner(path_learner)
+    learn = load_learner('export.pkl')
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
