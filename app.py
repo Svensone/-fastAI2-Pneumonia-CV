@@ -91,7 +91,7 @@ def prediction(img, display_img):
     # path_learner = pathlib.Path('models')
     # print(path_learner)
     # print(open('export.pkl','rb'))
-    folder_path = Path('export.pkl')
+    folder_path = pathlib.Path('export.pkl')
 
     learn = load_learner(folder_path)
     
