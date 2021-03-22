@@ -91,7 +91,7 @@ def prediction(img, display_img):
     # path_learner = pathlib.Path('models')
     # print(path_learner)
     # print(open('export.pkl','rb'))
-    learn = load_learner('resnet34_stage_2')
+    learn = load_learner('export.pkl')
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
