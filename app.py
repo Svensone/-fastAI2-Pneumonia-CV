@@ -36,9 +36,9 @@ import PIL.Image
 plt = platform.system()
 if plt == 'Linux': 
     pathlib.WindowsPath = pathlib.PosixPath
-else:
-    temp = pathlib.PosixPath
-    pathlib.PosixPath = pathlib.WindowsPath
+# else:
+#     temp = pathlib.PosixPath
+#     pathlib.PosixPath = pathlib.WindowsPath
 
 
 ## Layout App
@@ -88,10 +88,10 @@ def prediction(img, display_img):
         time.sleep(3)
 
 #  load Learner
-    path_learner = pathlib.Path('export.pkl')
+    path_learner = pathlib.Path('models/')
     print(path_learner)
-
-    learn = load_learner(path_learner)
+    # print(open('export.pkl','rb'))
+    learn = load_learner('resnet34_stage_2')
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
