@@ -39,7 +39,7 @@ import PIL.Image
 # else:
 temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.WindowsPath
-
+pathlib.PosixPath = temp
 
 ## Layout App
 ##################
