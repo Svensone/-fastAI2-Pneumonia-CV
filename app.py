@@ -88,8 +88,8 @@ def prediction(img, display_img):
         time.sleep(3)
 
 #  load Learner
-    path_learner = pathlib.Path('models')
-    print(path_learner)
+    # path_learner = pathlib.Path('models')
+    # print(path_learner)
     # print(open('export.pkl','rb'))
     learn = load_learner('resnet34_stage_2')
     
