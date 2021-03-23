@@ -36,13 +36,11 @@ import PIL.Image
 # pathlib.PosixPath = pathlib.WindowsPath
 
 # option 2: for when deploying on share.streamlit.io
-# plt = platform.system()
-# if plt == 'Linux': 
-#     pathlib.WindowsPath = pathlib.PosixPath
+plt = platform.system()
+if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
 # else:
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
-
+# temp = pathlib.PosixPath
+# pathlib.PosixPath = pathlib.WindowsPath
 # pathlib.PosixPath = temp
 
 ## Layout App
