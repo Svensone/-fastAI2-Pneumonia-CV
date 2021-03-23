@@ -12,7 +12,10 @@ import os
 import matplotlib.image as mpimg
 import requests
 from io import BytesIO
+
 import pathlib
+from pathlib import Path
+
 import base64
 from PIL import Image
 import PIL.Image
@@ -33,13 +36,14 @@ import PIL.Image
 # pathlib.PosixPath = pathlib.WindowsPath
 
 # option 2: for when deploying on share.streamlit.io
-# plt = platform.system()
-# if plt == 'Linux': 
-#     pathlib.WindowsPath = pathlib.PosixPath
-# else:
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
-pathlib.PosixPath = temp
+plt = platform.system()
+if plt == 'Linux': 
+    pathlib.WindowsPath = pathlib.PosixPath
+# # else:
+# temp = pathlib.PosixPath
+# pathlib.PosixPath = pathlib.WindowsPath
+
+# pathlib.PosixPath = temp
 
 ## Layout App
 ##################
@@ -89,7 +93,10 @@ def prediction(img, display_img):
 
 #  load Learner
     # move .pkl in models folder
-    learn = load_learner('export.pkl')
+    path = Path()
+    print(path.ls(file_exts='.pkl'))
+
+    learn = load_learner(path/'export.pkl')
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
