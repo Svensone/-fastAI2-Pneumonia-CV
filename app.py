@@ -91,11 +91,11 @@ def prediction(img, display_img):
 
 #  load Learner
     # move .pkl in models folder
-    path = pathlib.PurePath()
+    path = os.path.normpath('models/export.pkl')
     print(path)
-    print(path.ls(file_exts='.pkl'))
+    # print(path.ls(file_exts='.pkl'))
 
-    learn = load_learner(path/'export.pkl')
+    learn = load_learner(path)
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
