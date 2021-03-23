@@ -36,12 +36,12 @@ import PIL.Image
 # pathlib.PosixPath = pathlib.WindowsPath
 
 # option 2: for when deploying on share.streamlit.io
-plt = platform.system()
-if plt == 'Linux': 
-    pathlib.WindowsPath = pathlib.PosixPath
-# # else:
-# temp = pathlib.PosixPath
-# pathlib.PosixPath = pathlib.WindowsPath
+# plt = platform.system()
+# if plt == 'Linux': 
+#     pathlib.WindowsPath = pathlib.PosixPath
+# else:
+temp = pathlib.PosixPath
+pathlib.PosixPath = pathlib.WindowsPath
 
 # pathlib.PosixPath = temp
 
@@ -94,6 +94,7 @@ def prediction(img, display_img):
 #  load Learner
     # move .pkl in models folder
     path = Path()
+    print(path)
     print(path.ls(file_exts='.pkl'))
 
     learn = load_learner(path/'export.pkl')
