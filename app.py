@@ -88,14 +88,16 @@ def prediction(img, display_img):
         time.sleep(3)
 
 #  load Learner
-    path_model = Path()
+    path_model = pathlib.PurePath('export.pkl')
 
+    # move .pkl in models folder
+    learn = load_learner(path='./models', file='export.pkl')
 
-    learn = load_learner(path_model/'export.pkl')
+    learn = load_learner(path_model)
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
-    predict_prop = learn.predict(img)[2]
+    predict_prop = learn.predict(img)[2] 
 
     print(learn.predict(img))
 
