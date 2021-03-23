@@ -89,7 +89,7 @@ def prediction(img, display_img):
 
 #  load Learner
     # move .pkl in models folder
-    learn = load_learner('./models', 'export.pkl')
+    learn = load_learner('export.pkl')
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
