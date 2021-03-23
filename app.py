@@ -95,7 +95,7 @@ def prediction(img, display_img):
     print(path)
     # print(path.ls(file_exts='.pkl'))
 
-    learn = load_learner(path)
+    learn = load_learner("models/export.pkl")
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
