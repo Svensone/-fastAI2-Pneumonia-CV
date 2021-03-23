@@ -91,7 +91,7 @@ def prediction(img, display_img):
 
 #  load Learner
     # move .pkl in models folder
-    path = PurePath()
+    path = pathlib.PurePath()
     print(path)
     print(path.ls(file_exts='.pkl'))
 
