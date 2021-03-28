@@ -46,13 +46,24 @@ if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
 ## Layout App
 ##################
 
-st.title('** Pneumonia lung x-ray** - Classification')
+st.title('Pneumonia lung x-ray - Classification')
 st.markdown("""
 ### AI - Computer Vision Recognition with **fastai/pytorch**
 
-Classifing lung scans if pneumonia or healthy (normal)  \n \n 
+Classifing lung scans if pneumonia or healthy/ normal  \n \n 
 """)
+st.markdown("""
+2021.03.21: Accuracy on ResNet34 Architectur: 67% after 1 Epoch
+\n
+""")
+link1 = 'Model & Data Preprocessing [Github](https://github.com/Svensone/-fastAI2-Pneumonia-CV/blob/master/2021_03_29_%5BfastaiV2%5D_CV_mulitDatasets_Pneumonia_Kaggle.ipynb)'
+link2 = 'Deployment [Github](https://github.com/Svensone/-fastAI2-Pneumonia-CV/blob/master/2021_03_29_%5BfastaiV2%5D_CV_mulitDatasets_Pneumonia_Kaggle.ipynb)'
+st.markdown(link1, unsafe_allow_html=True, )
+st.markdown(link2, unsafe_allow_html=True)
 
+st.markdown("""
+## Test the Model yourself
+""")
 # Set Background Image *local file"
 ###################################################
 # @st.cache(allow_output_mutation=True)
