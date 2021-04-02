@@ -50,7 +50,10 @@ st.title('Pneumonia lung x-ray - Classification')
 st.markdown("""
 ### AI - Computer Vision Recognition with **fastai/pytorch**
 
-Classifing lung scans if pneumonia or healthy/ normal  \n \n 
+Classifing lung scans if pneumonia or healthy/ normal  \n 
+Dataset: \n
+Trainset: Normal: 1342, Pneumonia: 3876 \n 
+Testset: Normal: 234, Pneumonia: 390
 """)
 st.markdown("""
 2021.03.21: Accuracy on ResNet34 Architectur: 67% after 1 Epoch
