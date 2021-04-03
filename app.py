@@ -37,10 +37,11 @@ import PIL.Image
 
 # option 2: for when deploying on share.streamlit.io
 plt = platform.system()
-if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
-# else:
-# temp = pathlib.PosixPath
-# pathlib.PosixPath = pathlib.WindowsPath
+if plt == 'Linux': 
+    pathlib.WindowsPath = pathlib.PosixPath
+else:
+    temp = pathlib.PosixPath
+    pathlib.PosixPath = pathlib.WindowsPath
 # pathlib.PosixPath = temp
 
 ## Layout App
@@ -48,16 +49,11 @@ if plt == 'Linux': pathlib.WindowsPath = pathlib.PosixPath
 
 st.title('Pneumonia lung x-ray - Classification')
 st.markdown("""
-### AI - Computer Vision Recognition with **fastai/pytorch**
+## AI - Computer Vision Recognition with **fastai/pytorch**
 
-Classifing lung scans if pneumonia or healthy/ normal  \n 
-Dataset: \n
-Trainset: Normal: 1342, Pneumonia: 3876 \n 
-Testset: Normal: 234, Pneumonia: 390
-""")
-st.markdown("""
-2021.03.21: Accuracy on ResNet34 Architectur: 67% after 1 Epoch
-\n
+#### Classifing lung scans if pneumonia or healthy/ normal 
+Dataset: 5.000+ Images
+2021.03.21: Accuracy on ResNet34 Architectur: 67%
 """)
 link1 = 'Model & Data Preprocessing [Github](https://github.com/Svensone/-fastAI2-Pneumonia-CV/blob/master/2021_03_29_%5BfastaiV2%5D_CV_mulitDatasets_Pneumonia_Kaggle.ipynb)'
 link2 = 'Deployment [Github](https://github.com/Svensone/-fastAI2-Pneumonia-CV/blob/master/2021_03_29_%5BfastaiV2%5D_CV_mulitDatasets_Pneumonia_Kaggle.ipynb)'
@@ -105,9 +101,6 @@ def prediction(img, display_img):
 
 #  load Learner
     # move .pkl in models folder
-    path = os.path.normpath('models/export.pkl')
-    print(path)
-    # print(path.ls(file_exts='.pkl'))
 
     learn = load_learner("models/export.pkl")
     
@@ -118,20 +111,14 @@ def prediction(img, display_img):
     print(learn.predict(img))
 
     # Display results
-    st.success('this is {}'.format(predict_class))
-    # if str(predict_class) == 'legong':
-    #     st.success('this is a Scen e of the famous Legong Kraton Dance')
-    #     link = 'Find out more [Wikipedia](https://en.wikipedia.org/wiki/Legong)'
-    #     st.markdown(link, unsafe_allow_html=True)
-    # elif str(predict_class) == "barong":
-    #     st.success('this is a Scene of the Barong Dance, which is together with Sanghyang considered to be an ancient native Balinese Dance')
-    #     link = '[Barong Wikipedia](https://en.wikipedia.org/wiki/Barong_(mythology)#Barong_dance)'
-    #     st.markdown(link, unsafe_allow_html=True)
-    # else:
-    #     st.success('this is a Scene of the Kecak Dance, created by german artist Walter Spies in 1930s')
-    #     link = '[Kecak Wikipedia](https://en.wikipedia.org/wiki/Kecak)'
-    #     st.markdown(link, unsafe_allow_html=True)
-
+    if str(predict_class) == 'NORAML':
+        st.success('This is a scan of a healthy lung')
+        # link = 'Find out more [Wikipedia](https://en.wikipedia.org/wiki/Legong)'
+        # st.markdown(link, unsafe_allow_html=True)
+    else:
+        st.success('This scan shows a pneumonia infection')
+        # link = '[Barong Wikipedia](https://en.wikipedia.org/wiki/Barong_(mythology)#Barong_dance)'
+        # st.markdown(link, unsafe_allow_html=True)
 #######################################
 ### Image Selection
 #######################################
