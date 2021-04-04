@@ -24,10 +24,10 @@ import PIL.Image
 
 ## get local css
 ##################
-# def local_css(file_name):
-#     with open(file_name) as f:
-#         st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
-# local_css("style.css")
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+local_css("style.css")
 
 # adjustment for different systems (share.io PosixPath)
 ################################
@@ -56,36 +56,37 @@ Dataset: 5.000+ Images
 2021.03.21: Accuracy on ResNet34 Architectur: 67%
 """)
 link1 = 'Model & Data Preprocessing [Github](https://github.com/Svensone/-fastAI2-Pneumonia-CV/blob/master/2021_03_29_%5BfastaiV2%5D_CV_mulitDatasets_Pneumonia_Kaggle.ipynb)'
-link2 = 'Deployment [Github](https://github.com/Svensone/-fastAI2-Pneumonia-CV/blob/master/2021_03_29_%5BfastaiV2%5D_CV_mulitDatasets_Pneumonia_Kaggle.ipynb)'
+link2 = 'Deployment [Github](https://github.com/Svensone/-fastAI2-Pneumonia-CV/tree/master)'
 st.markdown(link1, unsafe_allow_html=True, )
 st.markdown(link2, unsafe_allow_html=True)
 
 st.markdown("""
 ## Test the Model yourself
 """)
+
 # Set Background Image *local file"
 ###################################################
-# @st.cache(allow_output_mutation=True)
-# def get_base64_of_bin_file(bin_file):
-#         with open(bin_file, 'rb') as f:
-#             data = f.read()
-#         return base64.b64encode(data).decode()
+@st.cache(allow_output_mutation=True)
+def get_base64_of_bin_file(bin_file):
+        with open(bin_file, 'rb') as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
 
-# def set_png_as_page_bg(png_file):
-#         bin_str = get_base64_of_bin_file(png_file)
-#         page_bg_img = '''
-#         <style>
-#         body {
-#         background-image: url("data:image/png;base64,%s");
-#         background-size: cover;
-#         }
-#         </style>
-#         ''' % bin_str
+def set_png_as_page_bg(png_file):
+        bin_str = get_base64_of_bin_file(png_file)
+        page_bg_img = '''
+        <style>
+        body {
+        background-image: url("data:image/png;base64,%s");
+        background-size: cover;
+        }
+        </style>
+        ''' % bin_str
         
-#         st.markdown(page_bg_img, unsafe_allow_html=True)
-#         return
+        st.markdown(page_bg_img, unsafe_allow_html=True)
+        return
 
-# set_png_as_page_bg('assets/bg2.jpeg')
+set_png_as_page_bg('assets/bg2.jpg')
 
 #######################################
 ### Image Classification
@@ -113,12 +114,9 @@ def prediction(img, display_img):
     # Display results
     if str(predict_class) == 'NORAML':
         st.success('This is a scan of a healthy lung')
-        # link = 'Find out more [Wikipedia](https://en.wikipedia.org/wiki/Legong)'
-        # st.markdown(link, unsafe_allow_html=True)
     else:
         st.success('This scan shows a pneumonia infection')
-        # link = '[Barong Wikipedia](https://en.wikipedia.org/wiki/Barong_(mythology)#Barong_dance)'
-        # st.markdown(link, unsafe_allow_html=True)
+
 #######################################
 ### Image Selection
 #######################################
@@ -155,9 +153,7 @@ else:
     if url !='':
         # print(url)
         try:
-# test url pic
-# https://volunteerprogramsbali.org/wp-content/uploads/2015/11/news-108.jpg
-            # Read image from the url
+           # Read image from the url
             response = requests.get(url)
             pil_img = PIL.Image.open(BytesIO(response.content))
             display_img = np.asarray(pil_img) # Image to display
