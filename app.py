@@ -101,13 +101,18 @@ def prediction(img, display_img):
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
-    predict_prop = learn.predict(img)[2] 
+    predict_proba = learn.predict(img)[2]
+
+    proba = float(predict_proba[1]) if str(predict_class) == 0 else float(predict_proba[0])
+    proba = (proba * 100)
+    proba = int(proba)
+
     # Display results
     if str(predict_class) == 'NORAML':
-        st.success('This is a scan of a healthy lung')
+        st.success(f'This is a scan of a healthy lung. Probability of Prediction is {proba} % ')
         st.write()
     else:
-        st.success('This scan shows a pneumonia infection')
+        st.success(f'This scan shows a pneumonia infection. Probability of Prediction is {proba} % ')
 
 #######################################
 ### Image Selection
