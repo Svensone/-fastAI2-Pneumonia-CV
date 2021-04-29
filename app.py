@@ -33,7 +33,6 @@ def get_base64_of_bin_file(bin_file):
         with open(bin_file, 'rb') as f:
             data = f.read()
         return base64.b64encode(data).decode()
-
 def set_png_as_page_bg(png_file):
         bin_str = get_base64_of_bin_file(png_file)
         page_bg_img = '''
@@ -44,7 +43,6 @@ def set_png_as_page_bg(png_file):
         }
         </style>
         ''' % bin_str
-        
         st.markdown(page_bg_img, unsafe_allow_html=True)
         return
 set_png_as_page_bg('assets/bg2.jpg')
@@ -71,8 +69,7 @@ st.title('Pneumonia lung x-ray - Classification')
 st.markdown("""
 ## AI- Computer Vision with **fastai/pytorch**
 #### Classifing lung scans if pneumonia or healthy 
-**Dataset**: 5.000+ Images of lung x-rays, **Accuracy** on ResNet34 Architectur: 67%
-""")
+**Dataset**: 5.000+ Images of lung x-rays, **Accuracy** on ResNet34 Architectur: 67%""")
 link1 = 'Model & Data Preprocessing [Github](https://github.com/Svensone/-fastAI2-Pneumonia-CV/blob/master/2021_03_29_%5BfastaiV2%5D_CV_mulitDatasets_Pneumonia_Kaggle.ipynb)'
 link2 = 'Deployment [Github](https://github.com/Svensone/-fastAI2-Pneumonia-CV/tree/master)'
 st.markdown(link1, unsafe_allow_html=True)
@@ -89,30 +86,29 @@ st.markdown("""
 def prediction(img, display_img):
     # display the image
     st.image(display_img, use_column_width=True)
-
     # loading spinner
     with st.spinner('Wait a second .....'):
         time.sleep(3)
 
-#  load Learner
-    # move .pkl in models folder
-
+    #  load Learner
     learn = load_learner("models/export.pkl")
     
     # Prediction on Image
     predict_class = learn.predict(img)[0]
     predict_proba = learn.predict(img)[2]
 
-    proba = float(predict_proba[1]) if str(predict_class) == 0 else float(predict_proba[0])
-    proba = (proba * 100)
-    proba = int(proba)
+    print(f'Prediction Class : {predict_class} and probability {predict_proba}')
+
+    proba = float(predict_proba[1]) if str(predict_class) == 'PNEUMONIA' else float(predict_proba[0])
+    proba = round((proba * 100), 2)
+    # print(f'predict class is {predict_class} with probab {proba}')
 
     # Display results
-    if str(predict_class) == 'NORAML':
-        st.success(f'This is a scan of a healthy lung. Probability of Prediction is {proba} % ')
-        st.write()
+    if str(predict_class) == 'PNEUMONIA':
+        st.success(f'This is a scan of a healthy lung. Probabiltiy of Prediction: {proba} %')
+        # st.write()
     else:
-        st.success(f'This scan shows a pneumonia infection. Probability of Prediction is {proba} % ')
+        st.success(f'Pneumonia infection - please find a doctor! Probabiltiy of Prediction: {proba}%')
 
 #######################################
 ### Image Selection
@@ -136,7 +132,7 @@ if option == option1:
     ################
     im_test3 = PIL.Image.open(file_path)
     display_img = np.asarray(im_test3) # Image to display
-    print(img)
+    # print(img)
     # call predict func with this img as parameters
     prediction(img, display_img)
 
@@ -147,7 +143,7 @@ else:
     if url !='':
         # print(url)
         try:
-           # Read image from the url
+        # Read image from the url
             response = requests.get(url)
             pil_img = PIL.Image.open(BytesIO(response.content))
             display_img = np.asarray(pil_img) # Image to display
